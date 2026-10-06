@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="so">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#1769aa">
+<title>Aayatiin Group</title>
+<style>
+:root{--accent:#2563eb;--bg:#070b18;--card:#111827;--card2:#172033;--text:#eef4ff;--muted:#9aa9c2;--danger:#fb7185;--ok:#34d399;--gold:#d9b65a;--line:#27344a;--shadow:0 10px 28px rgba(0,0,0,.24)}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at 15% 0%,#172554 0,#070b18 38%,#050814 100%);color:var(--text)}
+button,input,select{font:inherit}button{cursor:pointer;border:1px solid #38527a;border-radius:9px;padding:9px 12px;background:linear-gradient(135deg,var(--accent),#4338ca);color:white;font-weight:700;box-shadow:0 5px 14px rgba(37,99,235,.18)}
+input,select{width:100%;padding:10px;border:1px solid #34445f;border-radius:9px;background:#0c1423;color:var(--text)}
+.app{max-width:1200px;margin:auto;padding:16px}.top{background:linear-gradient(135deg,#111827,#0f172a);border:1px solid #263653;border-radius:16px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 12px #0000000d;margin-bottom:12px}
+.logo{display:flex;align-items:center;gap:10px}.logo b{display:grid;place-items:center;width:40px;height:40px;background:linear-gradient(135deg,#2563eb,#7c3aed);color:white;border:1px solid #6077aa;border-radius:11px;font-size:18px;box-shadow:0 6px 18px #0005}.logo small{color:var(--muted)}
+.nav{display:flex;gap:7px;overflow:auto;margin-bottom:12px}.nav button{white-space:nowrap;background:#111b2d;color:#b9c8df;border:1px solid #2b3a54}.nav button.active{background:var(--accent);color:white}
+.page{display:none}.page.active{display:block}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.card{background:linear-gradient(145deg,#121b2c,#0f1726);border:1px solid #25334b;border-radius:13px;padding:13px;box-shadow:var(--shadow)}.stat strong{display:block;font-size:22px;margin-top:6px;color:#f5f8ff}.muted{color:var(--muted);font-size:13px}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:5px}.full{grid-column:1/-1}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:13px}th,td{padding:9px;border-bottom:1px solid var(--line);text-align:left}th{background:#172236;color:#dce7f8}
+.badge{padding:4px 8px;border-radius:20px;background:#edf2f7;font-size:12px}.ok{color:var(--ok)}.bad{color:var(--danger)}
+.chart{height:220px;display:flex;align-items:end;gap:7px;padding:15px 5px 5px;border-bottom:1px solid #ccd4df}.bar{flex:1;min-width:8px;background:var(--accent);border-radius:6px 6px 0 0;position:relative}.bar span{position:absolute;bottom:-22px;left:50%;transform:translateX(-50%);font-size:9px;color:var(--muted)}
+.login{min-height:100vh;display:grid;place-items:center;padding:20px}.loginbox{max-width:440px;width:100%;background:linear-gradient(145deg,#121b2c,#0c1320);border:1px solid #2b3b59;border-radius:20px;padding:25px;box-shadow:0 8px 35px #0002}.center{text-align:center}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:center;justify-content:center;padding:20px;z-index:5}.modal.show{display:flex}.modalbox{background:linear-gradient(145deg,#121b2c,#0c1320);border:1px solid #31425f;max-width:520px;width:100%;border-radius:18px;padding:20px;max-height:90vh;overflow:auto}
+.toast{position:fixed;right:15px;bottom:15px;background:#18212b;color:white;padding:12px 16px;border-radius:10px;display:none;z-index:9}
+.danger{background:var(--danger)}.secondary{background:#64748b}.light{background:#e7edf5;color:#243447}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.grid2,.formgrid{grid-template-columns:1fr}.app{padding:10px}.top{align-items:flex-start}.nav{padding-bottom:3px}}
+@media(max-width:480px){.grid{grid-template-columns:1fr 1fr}.stat strong{font-size:20px}table{font-size:12px}}
+@media print{.nav,.top button,.no-print{display:none!important}.page{display:block!important}.card{box-shadow:none;border:1px solid #ddd}.app{max-width:none}}
+
+.finance-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;border:1px solid #39496a;border-radius:14px;background:linear-gradient(100deg,#16233a,#101827 65%,#1b1735);box-shadow:var(--shadow)}
+.finance-main{display:flex;align-items:center;gap:12px}.finance-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,#d9b65a,#8f6a1f);font-size:21px;box-shadow:0 5px 18px #0005}.finance-main strong{display:block;font-size:25px;color:#f7e7a9}.finance-main small{color:#8292ad}.finance-btn{white-space:nowrap;background:linear-gradient(135deg,#8f6a1f,#d9b65a);color:#101522;border-color:#e7cf83}
+.finance-mini-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:9px}.mini-card{background:#0f1828;border:1px solid #25334c;border-radius:10px;padding:10px}.mini-card span{display:block;color:#9eabc0;font-size:12px}.mini-card b{display:block;margin-top:4px;font-size:15px;color:#edf3ff}.eyebrow{font-size:11px;letter-spacing:1.4px;color:#d9b65a}.modal-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.allocation-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}.alloc{background:#0d1625;border:1px solid #2c3c57;color:#c9d5e8;min-height:76px;display:flex;flex-direction:column;align-items:flex-start;gap:3px;text-align:left}.alloc>span{font-size:13px;font-weight:800}.alloc small{font-size:10px;color:#7f8fa8;font-weight:400}.alloc.active{border-color:#d9b65a;box-shadow:0 0 0 1px #d9b65a33;background:#182033}.finance-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0 13px}.finance-summary div{background:#0b1320;border:1px solid #263650;border-radius:9px;padding:9px}.finance-summary span{display:block;font-size:11px;color:#8391a8}.finance-summary b{display:block;margin-top:3px;font-size:14px}.secondary{background:#202c40!important;color:#d7e0ef!important;border-color:#34445e!important}
+@media(max-width:800px){.finance-strip{align-items:flex-start;flex-direction:column}.finance-btn{width:100%}.finance-mini-grid{grid-template-columns:repeat(2,1fr)}.allocation-grid{grid-template-columns:repeat(2,1fr)}.finance-summary{grid-template-columns:1fr 1fr 1fr}}
+</style>
+</head>
+<body>
+<div id="login" class="login">
+  <div class="loginbox">
+    <div class="center">
+      <div class="logo" style="justify-content:center"><b>AG</b></div>
+      <h1>Aayatiin Group</h1><p class="muted">Ganacsi kasta waa User/ganacsi gooni ah.</p>
+    </div>
+    <div class="field"><label>Phone / User Number</label><input id="loginPhone" placeholder="Tusaale 25261xxxxxxx"></div>
+    <div class="field" style="margin-top:10px"><label>PIN</label><input id="loginPin" type="password" inputmode="numeric" placeholder="PIN"></div>
+    <div class="actions"><button style="width:100%" onclick="login()">Soo gal</button><button class="light" style="width:100%" onclick="openRegister()">Samee User / Ganacsi cusub</button></div>
+    <p class="muted center" style="margin-top:14px">Haddii ay tahay markii ugu horreysay, samee ganacsigaaga koowaad.</p>
+  </div>
+</div>
+
+<div id="app" class="app" style="display:none">
+ <div class="top">
+  <div class="logo"><b>AG</b><div><strong>Aayatiin Group</strong><br><small id="businessName"></small></div></div>
+  <div class="actions"><button class="secondary" onclick="logout()">Ka bax</button></div>
+ </div>
+ <div class="nav">
+  <button class="active" data-page="home" onclick="go('home',this)">🏠 Home</button>
+  <button data-page="business" onclick="go('business',this)">💼 Ganacsi</button>
+  <button data-page="reports" onclick="go('reports',this)">📊 Reports</button>
+  <button data-page="settings" onclick="go('settings',this)">⚙️ Settings</button>
+  <button data-page="data" onclick="go('data',this)">🛡️ Xog/Backup</button>
+ </div>
+
+ <section id="home" class="page active">
+  <div class="actions no-print"><select id="period" onchange="renderHome()"><option value="day">Maanta</option><option value="week">Isbuucan</option><option value="month">Bishan</option></select></div>
+  <div class="grid" style="margin-top:10px">
+   <div class="card stat"><span class="muted">🧾 Total Iib</span><strong id="sSales">$0</strong></div>
+   <div class="card stat"><span class="muted">📈 Faa'iido Guud</span><strong id="sProfit">$0</strong></div>
+   <div class="card stat"><span class="muted">💸 Kharash Guud</span><strong id="sExpense">$0</strong></div>
+   <div class="card stat"><span class="muted">💳 Deyn Guud</span><strong id="sDebt">$0</strong></div>
+  </div>
+  <div class="finance-strip" style="margin-top:12px">
+   <div class="finance-main"><div class="finance-icon">💰</div><div><div class="muted">Dhaqaalaha la hayo</div><strong id="heldProfit">$0.00</strong><small id="financeHint">Faa'iidada weli aan loo qoondeyn meel kale</small></div></div>
+   <button class="finance-btn" onclick="openFinance()">📊 Falanqee / Maamul</button>
+  </div>
+  <div class="finance-mini-grid">
+   <div class="mini-card"><span>💼 Maalgelin</span><b id="allocInvest">$0.00</b></div>
+   <div class="mini-card"><span>💳 Deyn</span><b id="allocDebt">$0.00</b></div>
+   <div class="mini-card"><span>👤 Milkiile</span><b id="allocOwner">$0.00</b></div>
+   <div class="mini-card"><span>💰 La hayo</span><b id="allocHeld">$0.00</b></div>
+  </div>
+  <div class="grid2" style="margin-top:12px">
+   <div class="card"><h3>Garaafka ganacsiga</h3><p class="muted">Iibka iyo faa'iidada — 14 maalmood ee ugu dambeeyay</p><div id="chart" class="chart"></div></div>
+   <div class="card"><h3>Kharash ku dar</h3><div class="formgrid">
+    <div class="field"><label>Nooca</label><select id="expType"><option>Kiro</option><option>Koronto</option><option>Mushahar</option><option>Kale</option></select></div>
+    <div class="field"><label>Lacagta</label><input id="expAmount" type="number" min="0" step="0.01"></div>
+    <div class="field full"><label>Faahfaahin</label><input id="expNote" placeholder="Tusaale: kirada bishan"></div>
+   </div><div class="actions"><button onclick="addExpense()">Kharash kaydi</button></div></div>
+  </div>
+ </section>
+
+ <section id="business" class="page">
+  <div class="nav" style="margin-top:0">
+   <button class="active" onclick="sub('sales',this)">Iibka</button><button onclick="sub('stock',this)">Stock/Dalab</button><button onclick="sub('debts',this)">Deymaha</button><button onclick="sub('expenses',this)">Kharash</button><button onclick="sub('invest',this)">Maalgelin</button>
+  </div>
+  <div id="sales" class="subpage">
+   <div class="card"><h3>Iib cusub</h3><p class="muted">Alaabta waxaa laga dooranayaa Stock-ga. Qiimaha hore ayuu app-ku u yaqaannaa.</p>
+    <div class="formgrid">
+     <div class="field full"><label>Alaabta macmiilku dalbaday</label><select id="saleProduct" onchange="salePreview()"></select></div>
+     <div class="field"><label>Tirada</label><input id="saleQty" type="number" min="1" value="1" oninput="salePreview()"></div>
+     <div class="field"><label>Discount / Dhimis</label><input id="saleDiscount" type="number" min="0" step="0.01" value="0" oninput="salePreview()"></div>
+     <div class="field full"><div id="salePreview" class="badge">Dooro alaab</div></div>
+    </div><div class="actions"><button onclick="addSale()">Iibka kaydi</button></div>
+   </div>
+   <div class="card" style="margin-top:12px"><h3>Iibabkii hore</h3><div id="salesList"></div></div>
+  </div>
+  <div id="stock" class="subpage" style="display:none">
+   <div class="card"><h3>Stock / Dalab cusub</h3><div class="formgrid">
+    <div class="field"><label>Magaca alaabta</label><input id="stName"></div><div class="field"><label>Tirada</label><input id="stQty" type="number" min="1"></div>
+    <div class="field"><label>Qiimaha alaabta (unit)</label><input id="stCost" type="number" min="0" step="0.01"></div><div class="field"><label>Qiimaha iibka (unit)</label><input id="stSell" type="number" min="0" step="0.01"></div>
+   </div><div class="actions"><button onclick="addStock()">Stock kaydi</button></div></div>
+   <div class="card" style="margin-top:12px"><h3>Bakhaarka hadda</h3><div id="stockList"></div></div>
+   <div class="card" style="margin-top:12px"><h3>Alaabihii hore ee yimid</h3><div id="stockHistory"></div></div>
+  </div>
+  <div id="debts" class="subpage" style="display:none">
+   <div class="card"><h3>Deyn cusub</h3><div class="formgrid">
+    <div class="field"><label>Magaca macmiilka</label><input id="dName"></div><div class="field"><label>Phone</label><input id="dPhone"></div>
+    <div class="field"><label>Lacagta</label><input id="dAmount" type="number" min="0" step="0.01"></div><div class="field"><label>Taariikhda</label><input id="dDate" type="date"></div>
+   </div><div class="actions"><button onclick="addDebt()">Deyn kaydi</button></div></div>
+   <div class="card" style="margin-top:12px"><h3>Deymaha</h3><div id="debtList"></div></div>
+  </div>
+  <div id="expenses" class="subpage" style="display:none">
+   <div class="card"><h3>Kharashaadka</h3><p class="muted">Kiro, koronto, mushahar iyo kharashyo kale.</p><div id="expenseList"></div></div>
+  </div>
+  <div id="invest" class="subpage" style="display:none">
+   <div class="card"><h3>💼 Maalgelin / Hanti dibadda ka timid</h3><p class="muted">Maalgelin kasta—ha noqoto mid dibadda ka timid ama faa'iido laga geliyay—alaabta la maalgeliyay waxay si toos ah uga mid noqonaysaa Stock-ga.</p><div class="formgrid">
+    <div class="field"><label>Magaca alaabta</label><input id="iName"></div><div class="field"><label>Tirada alaabta</label><input id="iQty" type="number" min="1" step="1"></div>
+    <div class="field"><label>Qiimaha alaabta (unit)</label><input id="iCost" type="number" min="0" step="0.01"></div><div class="field"><label>Qiimaha iibka (unit)</label><input id="iSell" type="number" min="0" step="0.01"></div>
+    <div class="field"><label>Lacag caddaan ah</label><input id="iCash" type="number" min="0" step="0.01"></div><div class="field"><label>Qiimaha maalgelinta</label><input id="iAmount" type="number" min="0" step="0.01"></div>
+   </div><div class="actions"><button onclick="addInvestment()">Maalgelin kaydi + Stock geli</button></div></div>
+   <div class="card" style="margin-top:12px"><h3>Maalgelintii hore</h3><div id="investList"></div></div>
+  </div>
+ </section>
+
+ <section id="reports" class="page">
+  <div class="card no-print"><h3>Reports</h3><select id="reportPeriod" onchange="renderReport()"><option value="day">Maalinle</option><option value="week">Isbuucle</option><option value="month">Bille</option><option value="prev">Bishii hore</option><option value="3m">3-bile</option><option value="6m">6-bile</option><option value="year">Sanadle</option></select><div class="actions"><button onclick="window.print()">Download / Save PDF</button></div></div>
+  <div id="reportArea" class="card" style="margin-top:12px"></div>
+ </section>
+
+ <section id="settings" class="page">
+  <div class="grid2">
+   <div class="card"><h3>📧 Email (ikhtiyaari) & Backup</h3><div class="field"><label>Email-ka guud</label><input id="setEmail" type="email" placeholder="example@email.com"></div><div class="actions"><button onclick="saveEmailSettings()">Kaydi Email & Password</button><button class="secondary" onclick="dailyBackup(true)">Backup hadda</button></div><p id="backupStatus" class="muted" style="margin-top:10px"></p></div>
+   <div class="card"><h3>Akoonkaaga</h3><div id="usersList"></div></div>
+   <div class="card"><h3>Midab & Luqad</h3><div class="field"><label>Luqad</label><select id="lang"><option>Somali</option><option>English</option></select></div><div class="field" style="margin-top:10px"><label>Midabka app-ka</label><select id="theme"><option value="#1769aa">Buluug</option><option value="#16834b">Cagaar</option><option value="#7c3aed">Purple</option><option value="#ea580c">Orange</option><option value="#be123c">Casaan</option><option value="#0f766e">Teal</option><option value="#334155">Slate</option><option value="#9333ea">Violet</option><option value="#0891b2">Cyan</option><option value="#854d0e">Brown</option></select></div><div class="actions"><button onclick="saveSettings()">Kaydi Settings</button></div></div>
+  </div>
+ </section>
+
+ <section id="data" class="page">
+  <div class="card"><h3>Xogta & Backup</h3><p class="muted">Waxaad soo dejisan kartaa xogta ganacsigan si aad meel kale ugu kaydsato.</p><div class="actions"><button onclick="exportData()">Download Backup JSON</button><button class="light" onclick="document.getElementById('importFile').click()">Soo celi Backup</button><input id="importFile" type="file" accept=".json" style="display:none" onchange="importData(event)"></div></div>
+  <div class="card" style="margin-top:12px"><h3>📧 Backup Email</h3><p class="muted">Email-ka guud: <b id="dataEmail">-</b></p><p id="dataBackupStatus" class="muted"></p><div class="actions"><button onclick="dailyBackup(true)">Backup hadda</button></div><p class="muted" style="margin-top:8px">Backup maalinle ah ayaa sample-ku xasuusanayaa. Dirista file-ka email-ka si automatic ah waxay u baahan tahay cloud/server dhab ah.</p></div>
+ </section>
+</div>
+
+<div id="emailSetup" class="modal"><div class="modalbox"><h3>🔐 Aayatiin Group — Email & Backup</h3><p class="muted">Marka app-kan markii ugu horreysay la isticmaalo, geli Email-ka guud iyo Password-ka. Waxaa lagu kaydinayaa Settings-ka si backup-ka maalinlaha ah loo maamulo.</p><div class="field"><label>Email-ka guud</label><input id="setupEmail" type="email" placeholder="example@email.com"></div><div class="field" style="margin-top:10px"><label>Password</label><input id="setupPassword" type="password" placeholder="Password"></div><div class="actions"><button onclick="saveEmailSetup()">Kaydi oo Bilow App-ka</button></div><p class="muted" style="margin-top:10px">⚠️ Sample-kan waa prototype: email/password-ka wuxuu diyaarinayaa nidaamka backup-ka, laakiin dirista email-ka dhabta ah waxay u baahan tahay server/cloud.</p></div></div>
+<div id="modal" class="modal"><div class="modalbox"><h3>Samee User / Ganacsi cusub</h3><div class="formgrid">
+ <div class="field"><label>Magaca ganacsiga</label><input id="rName" placeholder="Tusaale: Aayatiin Gas"></div>
+ <div class="field"><label>Phone / User Number</label><input id="rPhone" placeholder="25261xxxxxxx"></div>
+ <div class="field"><label>PIN</label><input id="rPin" type="password" inputmode="numeric"></div>
+ <div class="field"><label>PIN ku celi</label><input id="rPin2" type="password" inputmode="numeric"></div>
+</div><div class="actions"><button onclick="register()">Samee</button><button class="secondary" onclick="closeModal()">Xir</button></div></div></div>
+<div id="financeModal" class="modal"><div class="modalbox finance-modal"><div class="modal-head"><div><span class="eyebrow">💰 MAAMULKA FAA'IIDADA</span><h3>Dhaqaalaha la hayo</h3><p class="muted">Dooro meesha faa'iidada loo qoondeynayo.</p></div><button class="secondary" onclick="closeFinance()">Xir</button></div>
+ <div class="allocation-grid">
+  <button class="alloc active" data-kind="investment" onclick="selectAlloc('investment',this)">💼<span>Maalgelin</span><small>Stock / hanti cusub</small></button>
+  <button class="alloc" data-kind="debt" onclick="selectAlloc('debt',this)">💳<span>Deyn</span><small>Lacag deyn loo qoondeeyay</small></button>
+  <button class="alloc" data-kind="owner" onclick="selectAlloc('owner',this)">👤<span>Milkiile</span><small>Milkiilaha loo bixiyay</small></button>
+  <button class="alloc" data-kind="held" onclick="selectAlloc('held',this)">💰<span>La hayo</span><small>Ganacsiga ku sii jira</small></button>
+ </div>
+ <div class="finance-summary"><div><span>Faa'iido saafi ah</span><b id="financeNet">$0.00</b></div><div><span>Hore loo qoondeeyay</span><b id="financeUsed">$0.00</b></div><div><span>Hadda la hayo</span><b id="financeAvailable">$0.00</b></div></div>
+ <div class="formgrid"><div class="field"><label>Lacagta</label><input id="allocAmount" type="number" min="0" step="0.01" placeholder="0.00"></div><div class="field"><label>Taariikh</label><input id="allocDate" type="date"></div><div id="allocStockFields" class="field full" style="display:none"><div class="formgrid"><div class="field"><label>📦 Alaabta la maalgelinayo</label><input id="allocProduct" placeholder="Magaca alaabta"></div><div class="field"><label>Tirada</label><input id="allocQty" type="number" min="1" step="1"></div><div class="field"><label>Qiimaha cost/unit</label><input id="allocCost" type="number" min="0" step="0.01"></div><div class="field"><label>Qiimaha iib/unit</label><input id="allocSell" type="number" min="0" step="0.01"></div></div></div><div class="field full"><label>Faahfaahin</label><input id="allocNote" placeholder="Tusaale: qalab cusub / lacag milkiile"></div></div>
+ <div class="actions"><button onclick="saveAllocation()">Kaydi Qoondeynta</button></div>
+ <div class="card" style="margin-top:12px"><h4>Qoondeyntii hore</h4><div id="allocationHistory"></div></div>
+ </div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const KEY='aayatiin_group_v1';
+let db; try { db=JSON.parse(localStorage.getItem(KEY)||'{"users":[]}'); } catch(e) { db={users:[]}; } if(!db || !Array.isArray(db.users)) db={users:[]}; db.config=db.config||{email:'',emailPassword:'',lastBackup:''};
+let current=null; db.users.forEach(u=>{u.profitAllocations=u.profitAllocations||[];u.stockHistory=u.stockHistory||[];u.investments=u.investments||[];u.settings=u.settings||{theme:'#2563eb',lang:'Somali'};});
+const today=()=>ymd(new Date());
+const nowStamp=()=>new Date().toISOString();
+const showStamp=x=>{let d=x.ts?new Date(x.ts):new Date((x.date||today())+'T00:00:00');return d.toLocaleString('so-SO',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}).replace(',','');};
+function save(){ try{localStorage.setItem(KEY,JSON.stringify(db)); return true;}catch(e){toast('Xogta lama kaydin: browser-ka ayaa xannibay kaydinta'); return false;} }
+function uid(){return (window.crypto && typeof window.crypto.randomUUID==='function') ? window.crypto.randomUUID() : ('u_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,10));}
+function toast(s){let t=document.getElementById('toast');t.textContent=s;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+function hasEmailSetup(){return !!(db.config&&db.config.email&&db.config.emailPassword)}
+function openEmailSetup(){document.getElementById('setupEmail').value=db.config.email||'';document.getElementById('setupPassword').value=db.config.emailPassword||'';document.getElementById('emailSetup').classList.add('show')}
+function saveEmailSetup(){let e=document.getElementById('setupEmail').value.trim(),pw=document.getElementById('setupPassword').value;if(!e||!e.includes('@')||!pw){toast('Geli Email iyo Password sax ah');return}db.config.email=e;db.config.emailPassword=pw;save();document.getElementById('emailSetup').classList.remove('show');updateBackupUI();toast('✅ Email & Backup waa la diyaariyey')}
+function saveEmailSettings(){let e=document.getElementById('setEmail').value.trim(),pw=document.getElementById('setEmailPassword').value;if(!e||!e.includes('@')||!pw){toast('Geli Email iyo Password sax ah');return}db.config.email=e;db.config.emailPassword=pw;save();updateBackupUI();toast('Email & Password waa la kaydiyey')}
+function dailyBackup(force=false){if(!hasEmailSetup()){openEmailSetup();return}let todayKey=today();if(!force&&db.config.lastBackup===todayKey)return;db.config.lastBackup=todayKey;save();updateBackupUI();if(force){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Aayatiin_Group_Daily_Backup_'+todayKey+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);toast('✅ Backup-ka maanta waa la sameeyey')} }
+function updateBackupUI(){let e=db.config?.email||'-',st=db.config?.lastBackup?('Backup kii ugu dambeeyay: '+db.config.lastBackup):'Backup maanta weli lama samayn';let a=document.getElementById('setEmail'),b=document.getElementById('setEmailPassword'),c=document.getElementById('backupStatus'),d=document.getElementById('dataEmail'),f=document.getElementById('dataBackupStatus');if(a)a.value=db.config?.email||'';if(b)b.value=db.config?.emailPassword||'';if(c)c.textContent=st;if(d)d.textContent=e;if(f)f.textContent=st}
+function openRegister(){if(db.users.length>=10){toast('Waxaad gaartay 10 User/ganacsi');return}document.getElementById('modal').classList.add('show')}
+function closeModal(){document.getElementById('modal').classList.remove('show')}
+function register(){
+ const name=document.getElementById('rName').value.trim();
+ const phone=document.getElementById('rPhone').value.trim();
+ const pin=document.getElementById('rPin').value.trim();
+ const p2=document.getElementById('rPin2').value.trim();
+ if(!name||!phone||!pin||!p2){toast('Fadlan buuxi dhammaan meelaha');return;}
+ if(pin!==p2){toast('PIN-yadu isma laha');return;}
+ if(pin.length<4){toast('PIN-ku ugu yaraan 4 lambar ha ahaado');return;}
+ if(db.users.some(u=>String(u.phone).trim()===phone)){toast('Phone-kan hore ayuu u diiwaangashan yahay');return;}
+ const u={id:uid(),name,phone,pin,created:today(),sales:[],stock:[],debts:[],expenses:[],investments:[],profitAllocations:[],settings:{theme:'#2563eb',lang:'Somali'}};
+ db.users.push(u);
+ if(!save()){db.users.pop();return;}
+ closeModal();
+ ['rName','rPhone','rPin','rPin2'].forEach(x=>document.getElementById(x).value='');
+ document.getElementById('loginPhone').value=phone;
+ document.getElementById('loginPin').value=pin;
+ toast('✅ User/ganacsi waa la sameeyay — hadda riix Soo gal');
+}
+function login(){
+ const phone=document.getElementById('loginPhone').value.trim();
+ const pin=document.getElementById('loginPin').value.trim();
+ if(!phone||!pin){toast('Geli Phone/User Number iyo PIN');return;}
+ current=db.users.find(u=>String(u.phone).trim()===phone && String(u.pin).trim()===pin);
+ if(!current){toast('❌ Phone/User Number ama PIN waa khalad');return;}
+ document.getElementById('login').style.display='none';
+ document.getElementById('app').style.display='block';
+ document.getElementById('businessName').textContent=current.name+' • '+current.phone;
+ applySettings(); renderAll(); dailyBackup(false); updateBackupUI();
+}
+function logout(){current=null;document.getElementById('app').style.display='none';document.getElementById('login').style.display='grid';document.getElementById('loginPin').value=''}
+function go(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.nav>button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');if(id==='reports')renderReport();if(id==='settings')renderUsers()}
+function sub(id,btn){document.querySelectorAll('.subpage').forEach(x=>x.style.display='none');document.getElementById(id).style.display='block';btn.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('active'));btn.classList.add('active');renderAll()}
+function money(n){return '$'+Number(n||0).toFixed(2)}
+function inRange(d,type){
+ let x=new Date(d+'T00:00:00'), now=new Date(), s=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+ if(type==='day')return x>=s;
+ if(type==='week'){let day=s.getDay()||7;let st=new Date(s);st.setDate(s.getDate()-day+1);return x>=st}
+ if(type==='month')return x.getMonth()===s.getMonth()&&x.getFullYear()===s.getFullYear();
+ return true
+}
+function metrics(type='month'){
+ let sales=current.sales.filter(x=>inRange(x.date,type)), ex=current.expenses.filter(x=>inRange(x.date,type)), debts=current.debts.filter(x=>inRange(x.date,'month'));
+ let saleTotal=sales.reduce((a,x)=>a+x.total,0), profit=sales.reduce((a,x)=>a+x.profit,0), expense=ex.reduce((a,x)=>a+x.amount,0), debt=debts.reduce((a,x)=>a+x.amount,0);
+ return {sales:saleTotal,profit,expense,debt,net:profit-expense}
+}
+function renderHome(){
+ let m=metrics(period.value);sSales.textContent=money(m.sales);sProfit.textContent=money(m.profit);sExpense.textContent=money(m.expense);sDebt.textContent=money(m.debt);
+ let days=[];for(let i=13;i>=0;i--){let d=new Date();d.setDate(d.getDate()-i);let ds=ymd(d);let sp=current.sales.filter(x=>x.date===ds).reduce((a,x)=>a+x.profit,0);days.push({d:ds.slice(5),v:sp})}
+ let max=Math.max(1,...days.map(x=>x.v));renderFinance();chart.innerHTML=days.map(x=>`<div class="bar" style="height:${Math.max(5,x.v/max*100)}%" title="${money(x.v)}"><span>${x.d}</span></div>`).join('')
+}
+function addExpense(){let amount=+expAmount.value;if(!amount){toast('Geli lacagta');return}current.expenses.push({type:expType.value,amount,note:expNote.value,date:today(),ts:nowStamp()});save();expAmount.value='';expNote.value='';renderAll();toast('Kharash waa la kaydiyey')}
+function addStock(){
+ let name=stName.value.trim(),qty=+stQty.value,cost=+stCost.value,sell=+stSell.value;if(!name||qty<=0){toast('Geli xogta stock-ga');return}
+ let existing=current.stock.find(x=>x.name.toLowerCase()===name.toLowerCase()&&x.cost===cost&&x.sell===sell);
+ if(existing) existing.qty+=qty; else current.stock.push({id:uid(),name,qty,cost,sell,initial:qty,date:today(),ts:nowStamp()});
+ current.stockHistory=current.stockHistory||[];current.stockHistory.push({name,qty,cost,sell,date:today(),ts:nowStamp()});save();['stName','stQty','stCost','stSell'].forEach(x=>document.getElementById(x).value='');renderAll();toast('Stock waa la kaydiyey')
+}
+function salePreview(){
+ let p=current?.stock.find(x=>x.id===saleProduct.value),q=+saleQty.value||0,disc=+saleDiscount.value||0;
+ if(!p){salePreviewEl.textContent='Dooro alaab';return}
+ let total=p.sell*q-disc,cost=p.cost*q,profit=total-cost;
+ salePreviewEl.innerHTML=`Iib: <b>${money(total)}</b> | Qiimaha alaabta: <b>${money(cost)}</b> | Faa'iido: <b class="${profit<0?'bad':'ok'}">${money(profit)}</b> | Stock haraya: <b>${p.qty-q}</b>`;
+}
+const salePreviewEl=document.getElementById('salePreview');
+function addSale(){
+ let p=current.stock.find(x=>x.id===saleProduct.value),q=+saleQty.value||0,disc=+saleDiscount.value||0;
+ if(!p||q<=0){toast('Dooro alaab oo geli tirada');return}
+ if(q>p.qty){toast('Stock kuma filna');return}
+ let total=p.sell*q-disc,cost=p.cost*q,profit=total-cost;
+ p.qty-=q;current.sales.push({id:uid(),product:p.name,qty:q,cost:p.cost,sell:p.sell,discount:disc,total,profit,date:today(),ts:nowStamp()});
+ save();saleQty.value=1;saleDiscount.value=0;renderAll();toast('Iibka waa la kaydiyey')
+}
+function addDebt(){let name=dName.value.trim(),amount=+dAmount.value;if(!name||!amount){toast('Buuxi xogta deynta');return}current.debts.push({name,phone:dPhone.value,amount,date:dDate.value||today(),created:today(),ts:nowStamp()});save();['dName','dPhone','dAmount'].forEach(x=>document.getElementById(x).value='');dDate.value=today();renderAll();toast('Deyn waa la kaydiyey')}
+function addInvestment(){
+ let name=document.getElementById('iName').value.trim(),qty=+document.getElementById('iQty').value||0,cost=+document.getElementById('iCost').value||0,sell=+document.getElementById('iSell').value||0,cash=+document.getElementById('iCash').value||0,amount=+document.getElementById('iAmount').value||0;
+ if(!name||qty<=0||cost<0||sell<0||amount<=0){toast('Buuxi magaca, tirada, qiimaha iyo lacagta maalgelinta');return}
+ let existing=current.stock.find(x=>x.name.toLowerCase()===name.toLowerCase()&&x.cost===cost&&x.sell===sell);
+ if(existing) existing.qty+=qty; else current.stock.push({id:uid(),name,qty,cost,sell,initial:qty,date:today(),ts:nowStamp(),source:'investment'});
+ current.stockHistory=current.stockHistory||[];current.stockHistory.push({name,qty,cost,sell,date:today(),ts:nowStamp(),source:'investment'});
+ current.investments.push({id:uid(),name,qty,cost,sell,cash,amount,date:today(),ts:nowStamp(),source:'external'});
+ save();['iName','iQty','iCost','iSell','iCash','iAmount'].forEach(x=>document.getElementById(x).value='');renderAll();toast('✅ Maalgelinta waa la kaydiyey, alaabtana Stock ayay gashay')
+}
+
+function rows(arr,cols){if(!arr.length)return '<p class="muted">Xog ma jirto.</p>';return '<table><thead><tr>'+cols.map(c=>'<th>'+c[0]+'</th>').join('')+'</tr></thead><tbody>'+arr.slice().sort((a,b)=>b.date.localeCompare(a.date)).map(x=>'<tr>'+cols.map(c=>'<td>'+c[1](x)+'</td>').join('')+'</tr>').join('')+'</tbody></table>'}
+function renderAll(){
+ renderHome();
+ renderFinance();
+ saleProduct.innerHTML=current.stock.filter(x=>x.qty>0).map(x=>`<option value="${x.id}">${esc(x.name)} — Stock ${x.qty} — Iib ${money(x.sell)}</option>`).join('')||'<option value="">Stock ma jiro</option>';salePreview();
+ salesList.innerHTML=rows(current.sales,[['Waqti',x=>showStamp(x)],['Alaab',x=>x.product],['Tiro',x=>x.qty],['Iib',x=>money(x.total)],['Faa’iido',x=>money(x.profit)]]);
+ stockList.innerHTML=rows(current.stock,[['Alaab',x=>x.name],['Stock',x=>x.qty],['Qiimo',x=>money(x.cost)],['Iib',x=>money(x.sell)]]);
+ stockHistory.innerHTML=rows(current.stockHistory||[],[['Waqti',x=>showStamp(x)],['Alaab',x=>x.name],['Tiro',x=>x.qty],['Qiimo',x=>money(x.cost)],['Iib',x=>money(x.sell)]]);
+ debtList.innerHTML=rows(current.debts,[['Waqti',x=>showStamp(x)],['Macmiil',x=>x.name],['Phone',x=>x.phone],['Lacag',x=>money(x.amount)]]);
+ expenseList.innerHTML=rows(current.expenses,[['Waqti',x=>showStamp(x)],['Nooc',x=>x.type],['Faahfaahin',x=>x.note||'-'],['Lacag',x=>money(x.amount)]]);
+ investList.innerHTML=rows(current.investments,[['Waqti',x=>showStamp(x)],['Alaab',x=>x.name],['Tiro',x=>x.qty||0],['Cash',x=>money(x.cash)],['Maalgelin',x=>money(x.amount)]]);
+ if(document.getElementById('reports').classList.contains('active'))renderReport();
+}
+function periodDates(type){
+ let now=new Date(),end=new Date(now.getFullYear(),now.getMonth(),now.getDate()+1),start;
+ if(type==='day')start=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+ else if(type==='week'){let day=now.getDay()||7;start=new Date(now.getFullYear(),now.getMonth(),now.getDate()-day+1)}
+ else if(type==='month')start=new Date(now.getFullYear(),now.getMonth(),1);
+ else if(type==='prev'){start=new Date(now.getFullYear(),now.getMonth()-1,1);end=new Date(now.getFullYear(),now.getMonth(),1)}
+ else if(type==='3m')start=new Date(now.getFullYear(),now.getMonth()-2,1);
+ else if(type==='6m')start=new Date(now.getFullYear(),now.getMonth()-5,1);
+ else start=new Date(now.getFullYear(),0,1);
+ return [ymd(start),ymd(end)]
+}
+function reportData(type){
+ let [s,e]=periodDates(type),between=x=>x.date>=s&&x.date<e;
+ let sales=current.sales.filter(between),ex=current.expenses.filter(between),de=current.debts.filter(between),inv=current.investments.filter(between),stockMoves=(current.stockHistory||[]).filter(between),alloc=(current.profitAllocations||[]).filter(between);
+ let st=sales.reduce((a,x)=>a+x.total,0),p=sales.reduce((a,x)=>a+x.profit,0),x=ex.reduce((a,x)=>a+x.amount,0);
+ return {s,e,sales,ex,de,inv,stockMoves,alloc,st,p,x,net:p-x}
+}
+function renderReport(){let r=reportData(reportPeriod.value);reportArea.innerHTML=`<h2>Aayatiin Group — ${esc(current.name)}</h2><p><b>Period:</b> ${r.s} ilaa ${r.e}</p><div class="grid"><div class="card stat"><span>Total Iib</span><strong>${money(r.st)}</strong></div><div class="card stat"><span>Faa'iido</span><strong>${money(r.p)}</strong></div><div class="card stat"><span>Kharash</span><strong>${money(r.x)}</strong></div><div class="card stat"><span>${r.net>=0?'Faa’iido Saafi':'Khasaaro'}</span><strong class="${r.net<0?'bad':'ok'}">${money(Math.abs(r.net))}</strong></div></div>
+<h3>Iibka</h3>${rows(r.sales,[['Waqti',x=>showStamp(x)],['Alaab',x=>x.product],['Tiro',x=>x.qty],['Iib',x=>money(x.total)],['Faa’iido',x=>money(x.profit)]])}
+<h3>Kharashaadka</h3>${rows(r.ex,[['Waqti',x=>showStamp(x)],['Nooc',x=>x.type],['Faahfaahin',x=>x.note||'-'],['Lacag',x=>money(x.amount)]])}
+<h3>Deymaha</h3>${rows(r.de,[['Waqti',x=>showStamp(x)],['Macmiil',x=>x.name],['Phone',x=>x.phone],['Lacag',x=>money(x.amount)]])}
+<h3>Maalgelinta</h3>${rows(r.inv,[['Waqti',x=>showStamp(x)],['Alaab',x=>x.name],['Tiro',x=>x.qty||0],['Cash',x=>money(x.cash)],['Maalgelin',x=>money(x.amount)]])}<h3>📦 Stock / Dhaqdhaqaaqa Bakhaarka</h3>${rows(r.stockMoves,[['Waqti',x=>showStamp(x)],['Alaab',x=>x.name],['Tiro',x=>x.qty],['Qiimo',x=>money(x.cost)],['Iib',x=>money(x.sell)],['Source',x=>x.source||'Stock']])}
+<h3>💰 Maamulka Dhaqaalaha / Qoondeynta Faa'iidada</h3>${rows(r.alloc||[],[['Waqti',x=>showStamp(x)],['Meel',x=>({investment:'💼 Maalgelin',debt:'💳 Deyn',owner:'👤 Milkiile',held:'💰 La hayo'})[x.kind]||x.kind],['Lacag',x=>money(x.amount)],['Faahfaahin',x=>x.note||'-']])}
+<h3>Bakhaar / Stock hadda</h3>${rows(current.stock,[['Alaab',x=>x.name],['Stock',x=>x.qty],['Qiimo',x=>money(x.cost)],['Iib',x=>money(x.sell)]])}`}
+
+function renderUsers(){usersList.innerHTML=db.users.map(u=>`<div class="card" style="margin-top:10px"><b>${u.name}</b><br><span class="muted">${u.phone}</span><div class="actions"><button onclick="changePin('${u.id}')">Beddel PIN</button>${u.id!==current.id?`<button class="secondary" onclick="switchUser('${u.id}')">U gal</button>`:''}</div></div>`).join('')}
+function changePin(id){let u=db.users.find(x=>x.id===id),p=prompt('Geli PIN cusub ee '+u.name);if(p){u.pin=p;save();toast('PIN waa la beddelay')}}
+function switchUser(id){let u=db.users.find(x=>x.id===id);current=u;businessName.textContent=u.name+' • '+u.phone;applySettings();renderAll();toast('Waxaa lagu galay '+u.name)}
+function saveSettings(){current.settings.theme=theme.value;current.settings.lang=lang.value;save();applySettings();toast('Settings waa la kaydiyey')}
+function applySettings(){const themeEl=document.getElementById('theme'), langEl=document.getElementById('lang'); document.documentElement.style.setProperty('--accent',current?.settings?.theme||'#1769aa'); if(themeEl)themeEl.value=current?.settings?.theme||'#1769aa'; if(langEl)langEl.value=current?.settings?.lang||'Somali'}
+
+function financeTotals(){
+ let a=current.profitAllocations||[];
+ let gross=current.sales.reduce((s,x)=>s+x.profit,0), exp=current.expenses.reduce((s,x)=>s+x.amount,0), net=gross-exp;
+ let inv=a.filter(x=>x.kind==='investment').reduce((s,x)=>s+x.amount,0), debt=a.filter(x=>x.kind==='debt').reduce((s,x)=>s+x.amount,0), owner=a.filter(x=>x.kind==='owner').reduce((s,x)=>s+x.amount,0), held=a.filter(x=>x.kind==='held').reduce((s,x)=>s+x.amount,0);
+ let used=inv+debt+owner+held; return {gross,exp,net,inv,debt,owner,held,used,available:Math.max(0,net-used)};
+}
+let selectedAlloc='investment';
+function openFinance(){ if(!current)return; document.getElementById('financeModal').classList.add('show'); allocDate.value=today(); selectAlloc('investment',document.querySelector('.alloc[data-kind="investment"]')); renderFinance(); }
+function closeFinance(){document.getElementById('financeModal').classList.remove('show')}
+function selectAlloc(kind,btn){selectedAlloc=kind;document.querySelectorAll('.alloc').forEach(x=>x.classList.remove('active'));btn.classList.add('active');let box=document.getElementById('allocStockFields');if(box)box.style.display=kind==='investment'?'block':'none';}
+function saveAllocation(){
+ let amount=+allocAmount.value||0, f=financeTotals();
+ if(amount<=0){toast('Geli lacagta');return}
+ if(amount>f.available){toast('Lacagta aad qoondeyneysid way ka badan tahay Dhaqaalaha la hayo');return}
+ let note=allocNote.value.trim(); current.profitAllocations=current.profitAllocations||[]; let stamp=nowStamp(),dt=allocDate.value||today();
+ if(selectedAlloc==='investment'){
+   let pn=document.getElementById('allocProduct').value.trim(),qq=+document.getElementById('allocQty').value||0,cc=+document.getElementById('allocCost').value||0,ss=+document.getElementById('allocSell').value||0;
+   if(!pn||qq<=0||cc<0||ss<0){toast('Maalgelinta faa’iidada: geli alaabta, tirada, cost iyo qiimaha iibka');return}
+   let existing=current.stock.find(x=>x.name.toLowerCase()===pn.toLowerCase()&&x.cost===cc&&x.sell===ss);
+   if(existing) existing.qty+=qq; else current.stock.push({id:uid(),name:pn,qty:qq,cost:cc,sell:ss,initial:qq,date:dt,ts:stamp,source:'profit'});
+   current.stockHistory=current.stockHistory||[];current.stockHistory.push({name:pn,qty:qq,cost:cc,sell:ss,date:dt,ts:stamp,source:'profit'});
+   current.investments=current.investments||[];current.investments.push({id:uid(),name:pn,qty:qq,cost:cc,sell:ss,cash:amount,amount,date:dt,ts:stamp,source:'profit'});
+ } else if(selectedAlloc==='investment') { }
+ current.profitAllocations.push({id:uid(),kind:selectedAlloc,amount,note,date:dt,ts:stamp});
+ save(); ['allocAmount','allocNote','allocProduct','allocQty','allocCost','allocSell'].forEach(x=>{let el=document.getElementById(x);if(el)el.value=''}); renderAll();renderFinance(); toast(selectedAlloc==='investment'?'Qoondeynta faa’iidada waa la kaydiyey, alaabtana Stock ayay gashay':'Qoondeynta waa la kaydiyey');
+}
+function renderFinance(){
+ let f=financeTotals();
+ heldProfit.textContent=money(f.available);allocInvest.textContent=money(f.inv);allocDebt.textContent=money(f.debt);allocOwner.textContent=money(f.owner);allocHeld.textContent=money(f.held);
+ financeNet.textContent=money(f.net);financeUsed.textContent=money(f.used);financeAvailable.textContent=money(f.available);
+ let names={investment:'💼 Maalgelin',debt:'💳 Deyn',owner:'👤 Milkiile',held:'💰 La hayo'};
+ allocationHistory.innerHTML=rows(current.profitAllocations||[],[['Waqti',x=>showStamp(x)],['Meel',x=>names[x.kind]||x.kind],['Lacag',x=>money(x.amount)],['Faahfaahin',x=>x.note||'-']]);
+}
+
+function exportData(){let blob=new Blob([JSON.stringify(current,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=current.name.replace(/\s+/g,'_')+'_backup.json';a.click();URL.revokeObjectURL(a.href)}
+function importData(e){let f=e.target.files[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{try{let u=JSON.parse(rd.result);u.id=current.id;u.phone=current.phone;u.pin=current.pin;let i=db.users.findIndex(x=>x.id===current.id);db.users[i]=u;current=u;save();renderAll();toast('Backup waa la soo celiyey')}catch{toast('Backup-ka waa khalad')}};rd.readAsText(f)}
+dDate.value=today();
+
+window.addEventListener('load',()=>{
+ updateBackupUI();
+ if(!hasEmailSetup()) setTimeout(openEmailSetup,250);
+});
+
+/* ===== v12: hagaajin, amni, deymo, backup ===== */
+function ymd(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function hp(phone,pin){let t='AG|'+phone+'|'+pin,h1=0xdeadbeef,h2=0x41c6ce57;for(let i=0;i<t.length;i++){let c=t.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);return (h2>>>0).toString(16)+(h1>>>0).toString(16)}
+function fixUser(u){if(u.pin!==undefined){u.pinH=u.pinH||hp(String(u.phone).trim(),String(u.pin).trim());delete u.pin}
+ ['sales','stock','debts','expenses','investments','profitAllocations','stockHistory'].forEach(k=>{if(!Array.isArray(u[k]))u[k]=[]});
+ u.debts.forEach(d=>{d.id=d.id||uid();d.paid=Array.isArray(d.paid)?d.paid:[]});u.settings=u.settings||{theme:'#2563eb',lang:'Somali'};return u}
+db.config=db.config||{};delete db.config.emailPassword;db.config.bk=db.config.bk||{};db.users.forEach(fixUser);save();
+const sum=(a,k)=>a.reduce((t,x)=>t+(+x[k]||0),0);
+const rem=d=>Math.max(0,d.amount-d.paid.reduce((a,p)=>a+p.amt,0));
+function debtRemaining(){return current.debts.reduce((a,d)=>a+rem(d),0)}
+function rows(arr,cols){if(!arr.length)return '<p class="muted">Xog ma jirto.</p>';return '<table><thead><tr>'+cols.map(c=>'<th>'+c[0]+'</th>').join('')+'</tr></thead><tbody>'+arr.slice().sort((a,b)=>String(b.ts||b.date).localeCompare(String(a.ts||a.date))).map(x=>'<tr>'+cols.map(c=>'<td>'+esc(c[1](x))+'</td>').join('')+'</tr>').join('')+'</tbody></table>'}
+/* --- users / PIN --- */
+function register(){const g=x=>document.getElementById(x).value.trim();const name=g('rName'),phone=g('rPhone'),pin=g('rPin'),p2=g('rPin2');
+ if(!name||!phone||!pin||!p2){toast('Fadlan buuxi dhammaan meelaha');return}
+ if(pin!==p2){toast('PIN-yadu isma laha');return}
+ if(!/^\d{4,8}$/.test(pin)){toast('PIN-ku waa 4–8 lambar');return}
+ if(db.users.length>=10){toast('Waxaad gaartay 10 User/ganacsi');return}
+ if(db.users.some(u=>String(u.phone).trim()===phone)){toast('Phone-kan hore ayuu u diiwaangashan yahay');return}
+ const u=fixUser({id:uid(),name,phone,pinH:hp(phone,pin),created:today()});db.users.push(u);if(!save()){db.users.pop();return}
+ closeModal();['rName','rPhone','rPin','rPin2'].forEach(x=>document.getElementById(x).value='');document.getElementById('loginPhone').value=phone;toast('✅ User waa la sameeyay — geli PIN-ka oo riix Soo gal')}
+let fails=0,lockUntil=0;
+function login(){const phone=document.getElementById('loginPhone').value.trim(),pin=document.getElementById('loginPin').value.trim();
+ if(Date.now()<lockUntil){toast('Sug 30 ilbiriqsi kadibna isku day');return}
+ if(!phone||!pin){toast('Geli Phone/User Number iyo PIN');return}
+ const u=db.users.find(x=>String(x.phone).trim()===phone&&x.pinH===hp(phone,pin));
+ if(!u){if(++fails>=5){lockUntil=Date.now()+30000;fails=0}toast('❌ Phone/User Number ama PIN waa khalad');return}
+ fails=0;current=u;document.getElementById('login').style.display='none';document.getElementById('app').style.display='block';
+ businessName.textContent=current.name+' • '+current.phone;applySettings();renderAll();autoBackup(false)}
+function changePin(){const o=prompt('PIN-ka hadda:');if(o===null)return;const ph=String(current.phone).trim();if(current.pinH!==hp(ph,o.trim())){toast('PIN-ka hadda waa khalad');return}
+ const n=prompt('PIN cusub (4–8 lambar):');if(!n||!/^\d{4,8}$/.test(n.trim())){toast('PIN-ku waa 4–8 lambar');return}current.pinH=hp(ph,n.trim());save();toast('✅ PIN waa la beddelay')}
+function renderUsers(){usersList.innerHTML='<div class="card" style="margin-top:10px"><b>'+esc(current.name)+'</b><br><span class="muted">'+esc(current.phone)+'</span><div class="actions"><button onclick="changePin()">Beddel PIN</button></div></div>'}
+function switchUser(){}
+function hasEmailSetup(){return true}function openEmailSetup(){}function saveEmailSetup(){}
+function saveEmailSettings(){const e=document.getElementById('setEmail').value.trim();if(e&&!e.includes('@')){toast('Email-ka waa khalad');return}db.config.email=e;save();updateBackupUI();toast('Email waa la kaydiyey')}
+/* --- ilaalinta xogta --- */
+function addSale(){let p=current.stock.find(x=>x.id===saleProduct.value),q=Math.floor(+saleQty.value||0),disc=+saleDiscount.value||0;
+ if(!p||q<=0){toast('Dooro alaab oo geli tirada');return}if(q>p.qty){toast('Stock kuma filna');return}if(disc<0||disc>p.sell*q){toast('Dhimista waa khalad');return}
+ let total=p.sell*q-disc,cost=p.cost*q,profit=total-cost;p.qty-=q;current.sales.push({id:uid(),product:p.name,qty:q,cost:p.cost,sell:p.sell,discount:disc,total,profit,date:today(),ts:nowStamp()});
+ save();saleQty.value=1;saleDiscount.value=0;renderAll();toast('Iibka waa la kaydiyey')}
+const _as=addStock;addStock=function(){if(+stCost.value<0||+stSell.value<0){toast('Qiimaha ma noqon karo taban');return}_as()};
+const _ae=addExpense;addExpense=function(){if(+expAmount.value<0){toast('Lacagta ma noqon karto taban');return}_ae()};
+/* --- deymaha: bixin & haraaga --- */
+function addDebt(){const name=dName.value.trim(),amount=+dAmount.value;if(!name||!(amount>0)){toast('Buuxi magaca iyo lacagta deynta');return}
+ current.debts.push({id:uid(),name,phone:dPhone.value.trim(),amount,paid:[],date:dDate.value||today(),created:today(),ts:nowStamp()});save();
+ ['dName','dPhone','dAmount'].forEach(x=>document.getElementById(x).value='');dDate.value=today();renderAll();toast('Deyn waa la kaydiyey')}
+function payDebt(id){const d=current.debts.find(x=>x.id===id);if(!d)return;const r=rem(d),v=prompt('Intee bixiyey? Haraaga: '+money(r));if(v===null)return;const a=+v;
+ if(!(a>0)||a>r+1e-9){toast('Lacagta waa khalad (ugu badnaan '+money(r)+')');return}d.paid.push({amt:a,date:today(),ts:nowStamp()});save();renderAll();toast(a>=r-1e-9?'✅ Deynta waa dhamaatay':'✅ Lacagta waa la diiwaangeliyey')}
+function renderDebts(){const a=current.debts.slice().sort((x,y)=>((rem(y)>0)-(rem(x)>0))||y.date.localeCompare(x.date));
+ debtList.innerHTML=a.length?'<p><b>Haraaga guud: <span class="bad">'+money(debtRemaining())+'</span></b></p><table><thead><tr><th>Macmiil</th><th>Deyn</th><th>La bixiyey</th><th>Haraaga</th><th></th></tr></thead><tbody>'+a.map(d=>'<tr><td>'+esc(d.name)+'<br><span class="muted">'+esc(d.phone||'')+' • '+esc(d.date)+'</span></td><td>'+money(d.amount)+'</td><td class="ok">'+money(d.amount-rem(d))+'</td><td class="'+(rem(d)>0?'bad':'ok')+'">'+(rem(d)>0?money(rem(d)):'✅ Dhamaatay')+'</td><td>'+(rem(d)>0?'<button onclick="payDebt(\''+d.id+'\')">Bixi</button>':'')+'</td></tr>').join('')+'</tbody></table>':'<p class="muted">Xog ma jirto.</p>'}
+const _ra=renderAll;renderAll=function(){_ra();renderDebts();bkBanner()};
+const _rh=renderHome;renderHome=function(){_rh();sDebt.textContent=money(debtRemaining())};
+function dayRows(n){const o=[];for(let i=0;i<n;i++){const d=new Date();d.setDate(d.getDate()-i);const k=ymd(d),s=current.sales.filter(x=>x.date===k),e=current.expenses.filter(x=>x.date===k);
+ o.push({date:k,sales:sum(s,'total'),profit:sum(s,'profit'),expense:sum(e,'amount'),debtPaid:current.debts.reduce((a,x)=>a+sum(x.paid.filter(p=>p.date===k),'amt'),0)})}return o}
+const _rr=renderReport;renderReport=function(){_rr();const r=reportData(reportPeriod.value),pays=[];
+ current.debts.forEach(d=>d.paid.forEach(p=>{if(p.date>=r.s&&p.date<r.e)pays.push({date:p.date,ts:p.ts,name:d.name,amt:p.amt})}));
+ reportArea.insertAdjacentHTML('beforeend','<h3>💳 Deymaha weli furan — Haraaga</h3>'+rows(current.debts.filter(d=>rem(d)>0),[['Taariikh',x=>x.date],['Macmiil',x=>x.name],['Deyn',x=>money(x.amount)],['La bixiyey',x=>money(x.amount-rem(x))],['Haraaga',x=>money(rem(x))]])+'<h3>Lacagaha deymaha laga bixiyey (muddadan)</h3>'+rows(pays,[['Waqti',x=>showStamp(x)],['Macmiil',x=>x.name],['Lacag',x=>money(x.amt)]])+'<h3>📅 Report maalinle ah (14 maalmood)</h3>'+rows(dayRows(14),[['Maalin',x=>x.date],['Iib',x=>money(x.sales)],['Faa’iido',x=>money(x.profit)],['Kharash',x=>money(x.expense)],['Deyn la bixiyey',x=>money(x.debtPaid)]]))};
+/* --- backup: maalin kasta iskiis ah --- */
+const bkKey=()=>'ag_bk_'+current.id;
+function buildBackup(){const c=JSON.parse(JSON.stringify(current));delete c.pinH;c._dailyReports=dayRows(30);c._backupAt=nowStamp();return c}
+function dl(name,obj){const b=new Blob([JSON.stringify(obj,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
+function snapNow(force){try{let sn=JSON.parse(localStorage.getItem(bkKey())||'{}'),ks=Object.keys(sn).sort(),last=ks[ks.length-1];
+ if(!force&&last&&Date.now()-new Date(last+':00Z')<3*3600e3)return;sn[nowStamp().slice(0,16)]=buildBackup();Object.keys(sn).sort().slice(0,-10).forEach(k=>delete sn[k]);localStorage.setItem(bkKey(),JSON.stringify(sn))}catch(e){}}
+function autoBackup(force){if(!current)return;const t=today();snapNow(false);if(!force&&db.config.bk[current.id]===t){updateBackupUI();return}
+ dl(current.name.replace(/\s+/g,'_')+'_backup_'+t+'.json',buildBackup());db.config.bk[current.id]=t;save();updateBackupUI();bkBanner();if(force)toast('✅ Backup-ka maanta waa la sameeyey')}
+function dailyBackup(f){autoBackup(!!f)}
+function exportData(){autoBackup(true)}
+function applyBackup(u){u.id=current.id;u.phone=current.phone;u.pinH=current.pinH;delete u.pin;delete u._dailyReports;delete u._backupAt;fixUser(u);const i=db.users.findIndex(x=>x.id===current.id);db.users[i]=u;current=u;save();renderAll()}
+function importData(e){const f=e.target.files[0];e.target.value='';if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const u=JSON.parse(rd.result);if(!u||!Array.isArray(u.sales)||!Array.isArray(u.stock))throw 0;
+ if(!confirm('Xogta hadda jirta waa la beddelayaa. Sii wad?'))return;snapNow(true);applyBackup(u);toast('✅ Backup waa la soo celiyey')}catch(err){toast('Backup-ka waa khalad')}};rd.readAsText(f)}
+function restoreSnap(k){try{const sn=JSON.parse(localStorage.getItem(bkKey())||'{}');if(!sn[k]||!confirm('Xogta hadda jirta waa la beddelayaa. Sii wad?'))return;snapNow(true);applyBackup(JSON.parse(JSON.stringify(sn[k])));toast('✅ Waa la soo celiyey')}catch(e){toast('Khalad')}}
+function bkBanner(){if(!current)return;let b=document.getElementById('bkBanner');if(!b){b=document.createElement('div');b.id='bkBanner';b.className='card no-print';b.style.cssText='margin-bottom:10px;border-color:#fb7185';document.getElementById('home').prepend(b)}
+ const ok=db.config.bk[current.id]===today();b.style.display=ok?'none':'block';b.innerHTML='⚠️ Backup-ka maanta weli lama samayn. <button onclick="autoBackup(true)">Backup hadda</button>'}
+function renderSnaps(){if(!current)return;let box=document.getElementById('snapList');if(!box){box=document.createElement('div');box.id='snapList';box.className='card';box.style.marginTop='12px';document.getElementById('data').appendChild(box)}
+ let sn={};try{sn=JSON.parse(localStorage.getItem(bkKey())||'{}')}catch(e){}
+ box.innerHTML='<h3>🗂️ Backup-yada otomaatiga ah (mobailkan)</h3>'+(Object.keys(sn).sort().reverse().map(k=>'<div class="actions" style="align-items:center"><span>'+esc(showStamp({ts:k+':00Z'}))+'</span><button class="light" onclick="restoreSnap(\''+esc(k)+'\')">Soo celi</button></div>').join('')||'<p class="muted">Weli ma jiraan.</p>')}
+function updateBackupUI(){const st=current&&db.config.bk[current.id]?('Backup kii ugu dambeeyay: '+db.config.bk[current.id]):'Backup maanta weli lama samayn';
+ ['backupStatus','dataBackupStatus'].forEach(i=>{const e=document.getElementById(i);if(e)e.textContent=st});const a=document.getElementById('setEmail');if(a)a.value=db.config.email||'';const d=document.getElementById('dataEmail');if(d)d.textContent=db.config.email||'-';renderSnaps()}
+const _go=go;go=function(id,b){_go(id,b);if(id==='data')updateBackupUI()};
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&current)autoBackup(false)});
+</script>
+
+<script type="module">
+const V='https://www.gstatic.com/firebasejs/10.14.1/';
+let A,Au,F;
+try{[A,Au,F]=await Promise.all([import(V+'firebase-app.js'),import(V+'firebase-auth.js'),import(V+'firebase-firestore.js')])}
+catch(e){toast('⚠️ Internet ma jiro: Firebase lama furi karo. Dib u fur.');throw e}
+const app=A.initializeApp({apiKey:"AIzaSyArWJ0Z-8VlPwjRssdYkxYe2Q_AF-J5i64",authDomain:"aayatiin-group-fdf60.firebaseapp.com",projectId:"aayatiin-group-fdf60",storageBucket:"aayatiin-group-fdf60.firebasestorage.app",messagingSenderId:"457187154318",appId:"1:457187154318:web:f2e864b62329bd7afe6cdf"});
+const auth=Au.getAuth(app);
+const fs=F.initializeFirestore(app,{localCache:F.persistentLocalCache({tabManager:F.persistentMultipleTabManager()})});
+let unsub=null,dirty=false,timer=null,pendingReg=false;
+const em=p=>String(p).replace(/\D/g,'')+'@aayatiin.app',pw=p=>p+'-ag',$=id=>document.getElementById(id);
+const errMsg=e=>({'auth/email-already-in-use':'Phone-kan hore ayuu u diiwaangashan yahay','auth/invalid-credential':'❌ Phone ama PIN waa khalad','auth/wrong-password':'❌ Phone ama PIN waa khalad','auth/user-not-found':'❌ Phone ama PIN waa khalad','auth/network-request-failed':'Internet ma jiro','auth/too-many-requests':'Isku day badan, sug daqiiqad'}[e.code]||('Khalad: '+(e.code||e.message)));
+async function push(){timer=null;if(!current||!auth.currentUser)return;const d=JSON.parse(JSON.stringify(current));delete d.id;delete d.pinH;dirty=false;
+ try{await F.setDoc(F.doc(fs,'businesses',auth.currentUser.uid),d)}catch(e){dirty=true;clearTimeout(timer);timer=setTimeout(push,5000);toast('⚠️ Xogta online lama kaydin ('+(e.code||'')+')')}}
+window.save=function(){try{localStorage.setItem(KEY,JSON.stringify({users:[],config:db.config}))}catch(e){}
+ if(current&&auth.currentUser){dirty=true;clearTimeout(timer);timer=setTimeout(push,500)}return true};
+addEventListener('pagehide',()=>{if(dirty)push()});
+function showApp(){$('login').style.display='none';$('app').style.display='block';$('businessName').textContent=current.name+' • '+current.phone;applySettings();renderAll();autoBackup(false)}
+Au.onAuthStateChanged(auth,u=>{
+ if(unsub){unsub();unsub=null}
+ if(!u){current=null;db.users=[];$('app').style.display='none';$('login').style.display='grid';$('loginPin').value='';return}
+ unsub=F.onSnapshot(F.doc(fs,'businesses',u.uid),snap=>{
+  if(!snap.exists()){if(!pendingReg){toast('Akoonkan xog ma laha');Au.signOut(auth)}return}
+  if(dirty||snap.metadata.hasPendingWrites)return;
+  const first=!current;current=fixUser({...snap.data(),id:u.uid});db.users=[current];first?showApp():renderAll()},
+  e=>toast('Online: '+e.code))});
+window.login=async function(){const phone=$('loginPhone').value.trim(),pin=$('loginPin').value.trim();
+ if(Date.now()<lockUntil){toast('Sug 30 ilbiriqsi kadibna isku day');return}
+ if(!phone||!pin){toast('Geli Phone/User Number iyo PIN');return}
+ try{await Au.signInWithEmailAndPassword(auth,em(phone),pw(pin));fails=0}
+ catch(e){if(['auth/invalid-credential','auth/wrong-password','auth/user-not-found'].includes(e.code)&&++fails>=5){lockUntil=Date.now()+30000;fails=0}toast(errMsg(e))}};
+window.register=async function(){const g=x=>$(x).value.trim(),name=g('rName'),phone=g('rPhone'),pin=g('rPin'),p2=g('rPin2');
+ if(!name||!phone||!pin||!p2){toast('Fadlan buuxi dhammaan meelaha');return}
+ if(pin!==p2){toast('PIN-yadu isma laha');return}
+ if(!/^\d{4,8}$/.test(pin)){toast('PIN-ku waa 4–8 lambar');return}
+ if(phone.replace(/\D/g,'').length<6){toast('Phone-ku waa inuu ahaado lambarro (tusaale 25261xxxxxxx)');return}
+ pendingReg=true;
+ try{const c=await Au.createUserWithEmailAndPassword(auth,em(phone),pw(pin));
+  const d=JSON.parse(JSON.stringify(fixUser({name,phone,created:today()})));await F.setDoc(F.doc(fs,'businesses',c.user.uid),d);
+  closeModal();['rName','rPhone','rPin','rPin2'].forEach(x=>$(x).value='');toast('✅ Akoonka waa la sameeyay')}
+ catch(e){toast(errMsg(e))}finally{pendingReg=false}};
+window.logout=async function(){if(dirty)await push();if(unsub){unsub();unsub=null}await Au.signOut(auth)};
+window.changePin=async function(){const o=prompt('PIN-ka hadda:');if(o===null)return;const n=prompt('PIN cusub (4–8 lambar):');
+ if(!n||!/^\d{4,8}$/.test(n.trim())){toast('PIN-ku waa 4–8 lambar');return}
+ try{await Au.reauthenticateWithCredential(auth.currentUser,Au.EmailAuthProvider.credential(em(current.phone),pw(o.trim())));await Au.updatePassword(auth.currentUser,pw(n.trim()));toast('✅ PIN waa la beddelay')}catch(e){toast(errMsg(e))}};
+</script>
+</body></html>
